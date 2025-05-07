@@ -1,3 +1,9 @@
+> Proszę przetestować ciąg złożony z samych zer oraz plik TRNG_P testami statystycznymi NIST.
+
+> Następnie proszę obliczyć skrót (SHA-3) dla obu plików w taki sposób by uzyskać niezbędna ilość danych do dalszych testów (minimum 13MB). Wyniki działania funkcji skrótu SHA-3 proszę przetestować testami statystycznymi.
+
+> Proszę przygotować program testów tak, aby ciąg wejściowy został podzielony na podciągi o długości 1000_000 bitów (1Mb) i wykonać 100 testów (po jednym dla każdego podciągu).
+
 ### Wyniki dla TRNG_P:
 
 * ustawienia testu:
