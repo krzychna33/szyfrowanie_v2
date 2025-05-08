@@ -896,3 +896,14 @@ W efekcie algorytm generuje hash o tej samej długości co plik wejściowy, gdzi
 
 Skrypt znajduje się:
 [skrypt](/szyfrowanie_nodejs/src/lab_sha/generate_sha3.ts)
+
+### Wnioski:
+
+Dane z TRNG_P charakteryzują się wysoką losowością i przechodzą standardowe testy statystyczne, co świadczy o poprawnym działaniu źródła losowego.
+
+Dane zeros.bin są całkowicie deterministyczne i nie przejawiają żadnych cech losowości, dlatego wszystkie testy zakończyły się negatywnie.
+
+Funkcja skrótu SHA-3 zastosowana do danych z losowego generatora (TRNG_P) nie osłabiła ich losowości – dane pozostały statystycznie losowe po przetworzeniu.
+
+Wygenerowany plik zeros_sha3.bit, mimo że formalnie zawiera dane pochodzące z funkcji skrótu SHA-3, nie zachowuje losowości. Dzieje się tak, poniewaz
+plik zerosk_sha3.bit to nic innego jak wiele połączonych tych samych wyników funkcji hashującej.
