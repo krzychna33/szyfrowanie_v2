@@ -11,13 +11,15 @@ function generateSHA3Shortcut(inputFilePath: string, outputFileName: string): vo
 
     const fileContent = fs.readFileSync(inputFilePath);
     const chunkSize = 256; // Process the file in chunks of 256 bytes
-    const outputBuffer = Buffer.alloc(fileContent.length); // Create a buffer to store the final hash
+    const chunks = []
 
     for (let i = 0; i < fileContent.length; i += chunkSize) {
         const chunk = fileContent.subarray(i, i + chunkSize); // Use subarray instead of slice
-        const hash = createHash('sha3-256').update(chunk).digest(); // Hash the chunk
-        hash.copy(outputBuffer, i); // Copy the hash into the output buffer
+        const hash = createHash('sha3-256').update(chunk).digest();
+        chunks.push(hash);
     }
+
+    const outputBuffer = Buffer.concat(chunks); // Concatenate all the hash chunks into a single buffer
 
     const outputFilePath = path.join(__dirname, "..", "assets", outputFileName);
     fs.writeFileSync(outputFilePath, outputBuffer); // Save the final hash to the output file
