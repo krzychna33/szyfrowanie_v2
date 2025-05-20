@@ -10,7 +10,7 @@ async function generateLargeTextFile(
   filePath: string,
   sizeInGB: number = 10
 ): Promise<void> {
-  const targetSizeBytes = sizeInGB * 1024 * 1024 * 1024; // Convert GB to bytes
+  const targetSizeBytes = 1;
   const chunkSizeBytes = 64 * 1024 * 1024; // 64 MB chunks for efficient writing
 
   console.log(`Generating ${sizeInGB}GB text file at: ${filePath}`);
@@ -94,7 +94,7 @@ function generateTextContent(size: number): string {
 
 // Example usage
 async function main() {
-  const outputPath = path.join(__dirname, "..", "assets", "large-file-50.txt");
+  const outputPath = path.join(__dirname, "..", "assets", "large-file-small.txt");
   try {
     await generateLargeTextFile(outputPath, 50);
   } catch (error) {
