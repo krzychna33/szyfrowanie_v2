@@ -10,6 +10,7 @@
    3. [Wyniki dla 3.bit](#wyniki-dla-3bit)
    4. [Wyniki dla 4.bit](#wyniki-dla-4bit)
 4. [Sposób wprowadzania danych do ciągu losowego](#sposób-wprowadzania-danych-do-ciągu-losowego)
+5. [Wnioski](#wnioski)
 
 ## Krotko o Steganografii:
 
