@@ -1209,6 +1209,6 @@ Działalnie tego programu polega na dzieleniu program na bloki o wielkości bloc
 
 ## Wnioski
 
-Wyniki testów statystycznych, pokazują, że zastosowana metoda stenografii pozwala ukryć pewną liczbę bitów w pliku binarnym, przy zachowaniu jego losowości. 
+Wyniki testów statystycznych, pokazują, że zastosowana metoda stenografii (z wykorzystaniem kodu Golomba) pozwala ukryć pewną liczbę bitów w pliku binarnym, przy zachowaniu jego losowości. 
 Według naszych eksperymentów, zmiana 0.5% bitów i 0.67% bitów w pliku binarnym, nie wpływa na jego losowość. Jednakże,
 zmiana 1% i więcej bitów w pliku binarnym, powoduje, że plik przestaje być losowy.
