@@ -5,10 +5,10 @@
 1. [Krotko o Steganografii](#krotko-o-steganografii)
 2. [Wyniki dla TRNG_P.bit](#wyniki-dla-trng_pbit)
 3. [Wyniki dla plików z ukrytymi danymi](#wyniki-dla-plików-z-ukrytymi-danymi)
-   3. [Wyniki dla 1.bit](#wyniki-dla-1bit)
-   4. [Wyniki dla 2.bit](#wyniki-dla-2bit)
-   5. [Wyniki dla 3.bit](#wyniki-dla-3bit)
-   6. [Wyniki dla 4.bit](#wyniki-dla-4bit)
+   1. [Wyniki dla 1.bit](#wyniki-dla-1bit)
+   2. [Wyniki dla 2.bit](#wyniki-dla-2bit)
+   3. [Wyniki dla 3.bit](#wyniki-dla-3bit)
+   4. [Wyniki dla 4.bit](#wyniki-dla-4bit)
 
 ## Krotko o Steganografii:
 
