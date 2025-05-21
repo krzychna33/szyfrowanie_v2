@@ -1123,8 +1123,6 @@ provided in the addendum section of the documentation.
 
 ## Sposób wprowadzania danych do ciągu losowego
 
-Poniższy skrypt używa... 
-
 ```python
 from ortools.sat.python import cp_model
 
@@ -1206,6 +1204,8 @@ max_segments=None
 
 process_file("TRNG_P.bit", "output_modified.bit", block_size=block_size, golomb_order=golomb_order, max_segments=max_segments)
 ```
+
+Działalnie tego programu polega na dzieleniu program na bloki o wielkości block_size bitów. Natępnie wyznaczany jest władca Golomba, czy zbiór liczb całkowitych, w którym każda para znaczników tworzy unikalną różnicę. Rozmiar tego zbioru jest okreśłany w programie jako zmienna golomb_order. Wyznaczone w ten sposób wartości wskazują pozycje, w które w bloku danych wykonywana jest operacja XOR z 1 i danymi wejściowymi. Istnieje również możliwość określenia, dla ilu pierwszych bloków danych wpisywane są jedynki (zmienna max_segments).
 
 ## Wnioski
 
