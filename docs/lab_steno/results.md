@@ -9,6 +9,7 @@
    2. [Wyniki dla 2.bit](#wyniki-dla-2bit)
    3. [Wyniki dla 3.bit](#wyniki-dla-3bit)
    4. [Wyniki dla 4.bit](#wyniki-dla-4bit)
+4. [Sposób wprowadzania danych do ciągu losowego](#sposób-wprowadzania-danych-do-ciągu-losowego)
 
 ## Krotko o Steganografii:
 
@@ -1125,3 +1126,92 @@ provided in the addendum section of the documentation.
 
 ```
 
+## Sposób wprowadzania danych do ciągu losowego
+
+Poniższy skrypt używa... 
+
+```python
+from ortools.sat.python import cp_model
+
+def find_golomb_ruler(order, max_length):
+    model = cp_model.CpModel()
+    marks = [model.NewIntVar(0, max_length, f"m_{i}") for i in range(order)]
+    for i in range(order - 1):
+        model.Add(marks[i] < marks[i + 1])
+    model.Add(marks[0] == 0)
+    diffs = []
+    for i in range(order):
+        for j in range(i):
+            d = model.NewIntVar(1, max_length, f"d_{i}_{j}")
+            model.Add(d == marks[i] - marks[j])
+            diffs.append(d)
+    model.AddAllDifferent(diffs)
+    model.Minimize(marks[-1])
+    solver = cp_model.CpSolver()
+    status = solver.Solve(model)
+    if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        return [solver.Value(m) for m in marks]
+    return None
+
+def read_binary_file_as_bits(filename):
+    with open(filename, "rb") as f:
+        byte_data = f.read()
+    bits = []
+    for byte in byte_data:
+        bits.extend([(byte >> i) & 1 for i in reversed(range(8))])
+    return bits
+
+def bits_to_bytes(bits):
+    return bytes(int(''.join(map(str, bits[i:i+8])), 2) for i in range(0, len(bits), 8))
+
+def xor_with_golomb_mask(bits, block_size, golomb, max_segments=None):
+    output = bits[:]
+    num_blocks = len(bits) // block_size
+    segment_limit = min(max_segments if max_segments is not None else num_blocks, num_blocks)
+
+    for i in range(segment_limit):
+        block_start = i * block_size
+        for g in golomb:
+            idx = block_start + g
+            if idx < len(bits):
+                output[idx] ^= 1
+    return output
+
+def calculate_modified_percent(file_bites, golomb_order, max_segments):
+    modified_bits = golomb_order * max_segments
+    return (modified_bits / file_bites) * 100
+
+def process_file(input_file, output_file, block_size, golomb_order, max_segments=None):
+    bits = read_binary_file_as_bits(input_file)
+    max_length = block_size - 1
+    max_possible_segments = len(bits) // block_size
+
+    if max_segments is None:
+        max_segments = max_possible_segments
+
+    if max_segments > max_possible_segments:
+        raise ValueError(
+            f"Plik ma tylko {max_possible_segments} segmentów przy block_size={block_size}, "
+            f"a próbujesz zmodyfikować {max_segments} segmentów."
+        )
+
+    percent = calculate_modified_percent(len(bits), golomb_order, max_segments)
+    print(f"Modified: {percent:.6f}% bitów")
+
+    golomb = find_golomb_ruler(golomb_order, max_length)
+    print(f"Using Golomb ruler: {golomb}")
+
+    modified_bits = xor_with_golomb_mask(bits, block_size, golomb, max_segments)
+    with open(output_file, "wb") as f:
+        f.write(bits_to_bytes(modified_bits))
+
+block_size=800
+golomb_order=4
+max_segments=None
+
+process_file("TRNG_P.bit", "output_modified.bit", block_size=block_size, golomb_order=golomb_order, max_segments=max_segments)
+```
+
+## Wnioski
+
+Bla bla bla...
