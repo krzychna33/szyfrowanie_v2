@@ -1,5 +1,9 @@
 # Steganografia - raport z eksperymentu
 
+Krzysztof Surażyński
+
+Kajetan Harla
+
 #### Spis treści:
 
 1. [Krotko o Steganografii](#krotko-o-steganografii)
